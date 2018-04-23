@@ -63,6 +63,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthHolder> {
                 .setCalendarView(calendarView)
                 .setOnDaySelectedListener(onDaySelectedListener)
                 .createDaysAdapter();
+        daysAdapter.setOnDaySelectedListener(onDaySelectedListener);
         return monthDelegate.onCreateMonthHolder(daysAdapter, parent, viewType);
     }
 
@@ -89,6 +90,13 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthHolder> {
 
     public List<Month> getData() {
         return months;
+    }
+
+    public void setOnDaySelectedListener(OnDaySelectedListener onDaySelectedListener) {
+        this.onDaySelectedListener = onDaySelectedListener;
+        if (daysAdapter != null) {
+            daysAdapter.setOnDaySelectedListener(onDaySelectedListener);
+        }
     }
 
     public static class MonthAdapterBuilder {

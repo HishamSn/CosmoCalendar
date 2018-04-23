@@ -49,6 +49,16 @@ public class DefaultCalendarActivity extends AppCompatActivity implements RadioG
 
         initViews();
         createCriterias();
+
+        calendarView.setOnDaySelectedListener(new OnDaySelectedListener() {
+            @Override
+            public void onDaySelected(Day day) {
+                int year = day.getCalendar().get(Calendar.YEAR);
+                int month = day.getCalendar().get(Calendar.MONTH) + 1;
+                int dayOfMonth = day.getCalendar().get(Calendar.DAY_OF_MONTH);
+                Toast.makeText(DefaultCalendarActivity.this, year + "-" + month + "-" + dayOfMonth, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initViews() {

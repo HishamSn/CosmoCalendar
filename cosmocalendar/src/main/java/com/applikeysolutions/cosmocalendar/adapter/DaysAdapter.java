@@ -40,6 +40,10 @@ public class DaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.onDaySelectedListener = onDaySelectedListener;
     }
 
+    public void setOnDaySelectedListener(OnDaySelectedListener onDaySelectedListener) {
+        this.onDaySelectedListener = onDaySelectedListener;
+    }
+
     @Override
     public int getItemViewType(int position) {
         if (position < Constants.DAYS_IN_WEEK && calendarView.isShowDaysOfWeek()) {
@@ -56,9 +60,9 @@ public class DaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case ItemViewType.DAY_OF_WEEK:
-                return dayOfWeekDelegate.onCreateDayHolder(parent, viewType);
+                return dayOfWeekDelegate.onCreateDayHolder(parent, viewType, onDaySelectedListener);
             case ItemViewType.MONTH_DAY:
-                return dayDelegate.onCreateDayHolder(parent, viewType);
+                return dayDelegate.onCreateDayHolder(parent, viewType, onDaySelectedListener);
             case ItemViewType.OTHER_MONTH_DAY:
                 return otherDayDelegate.onCreateDayHolder(parent, viewType);
             default:
@@ -80,14 +84,6 @@ public class DaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 dayDelegate.onBindDayHolder(this, day, (DayHolder) holder, position);
                 break;
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onDaySelectedListener != null) {
-                    onDaySelectedListener.onDaySelected(day);
-                }
-            }
-        });
     }
 
     @Override

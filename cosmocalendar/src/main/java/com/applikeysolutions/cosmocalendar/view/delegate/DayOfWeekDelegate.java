@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.applikeysolutions.cosmocalendar.listeners.OnDaySelectedListener;
 import com.applikeysolutions.customizablecalendar.R;
 import com.applikeysolutions.cosmocalendar.adapter.viewholder.DayOfWeekHolder;
 import com.applikeysolutions.cosmocalendar.model.Day;
@@ -15,7 +16,7 @@ public class DayOfWeekDelegate extends BaseDelegate {
         this.calendarView = calendarView;
     }
 
-    public DayOfWeekHolder onCreateDayHolder(ViewGroup parent, int viewType) {
+    public DayOfWeekHolder onCreateDayHolder(ViewGroup parent, int viewType, OnDaySelectedListener onDaySelectedListener) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_day_of_week, parent, false);
         return new DayOfWeekHolder(view, calendarView);
     }

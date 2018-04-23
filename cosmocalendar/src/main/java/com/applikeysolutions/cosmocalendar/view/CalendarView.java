@@ -103,6 +103,9 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
 
     public void setOnDaySelectedListener(com.applikeysolutions.cosmocalendar.listeners.OnDaySelectedListener onDaySelectedListener) {
         this.onDaySelectedListener = onDaySelectedListener;
+        if (monthAdapter != null) {
+            monthAdapter.setOnDaySelectedListener(onDaySelectedListener);
+        }
     }
 
     public CalendarView(Context context) {
