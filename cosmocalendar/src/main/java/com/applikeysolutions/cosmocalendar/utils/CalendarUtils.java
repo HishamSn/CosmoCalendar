@@ -58,6 +58,12 @@ public final class CalendarUtils {
         } while (!DateUtils.isSameDayOfMonth(firstDisplayedDayCalendar, end)
                 || !DateUtils.isSameMonth(firstDisplayedDayCalendar, end));
 
+        for (Day day : days) {
+            if (day.getCalendar().getTime().getTime() < Calendar.getInstance().getTime().getTime()) {
+                day.setDisabled(true);
+            }
+        }
+
         return new Month(createDay(firstDayOfMonthCalendar, settingsManager, targetMonth), days);
     }
 
@@ -97,11 +103,11 @@ public final class CalendarUtils {
         final List<Month> months = new ArrayList<>();
 
         final Calendar calendar = Calendar.getInstance();
-        for (int i = 0; i < SettingsManager.DEFAULT_MONTH_COUNT / 2; i++) {
-            calendar.add(Calendar.MONTH, -1);
-        }
+//        for (int i = 0; i < SettingsManager.DEFAULT_MONTH_COUNT / 2; i++) {
+//            calendar.add(Calendar.MONTH, -1);
+//        }
 
-        for (int i = 0; i < SettingsManager.DEFAULT_MONTH_COUNT; i++) {
+        for (int i = 0; i < SettingsManager.DEFAULT_MONTH_COUNT / 2; i++) {
             months.add(createMonth(calendar.getTime(), settingsManager));
             DateUtils.addMonth(calendar);
         }
@@ -162,7 +168,7 @@ public final class CalendarUtils {
         }
 
         if (settingsManager.getDisabledDaysCriteria() != null) {
-            if(!day.isDisabled()){
+            if (!day.isDisabled()) {
                 day.setDisabled(isDayDisabledByCriteria(day, settingsManager.getDisabledDaysCriteria()));
             }
         }
@@ -185,7 +191,7 @@ public final class CalendarUtils {
 
     public static boolean isDayDisabledByCriteria(Day day, DisabledDaysCriteria criteria) {
         int field = -1;
-        switch (criteria.getCriteriaType()){
+        switch (criteria.getCriteriaType()) {
             case DAYS_OF_MONTH:
                 field = Calendar.DAY_OF_MONTH;
                 break;
@@ -195,15 +201,15 @@ public final class CalendarUtils {
                 break;
         }
 
-        for(int dayInt : criteria.getDays()){
-            if(dayInt == day.getCalendar().get(field)){
+        for (int dayInt : criteria.getDays()) {
+            if (dayInt == day.getCalendar().get(field)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static int getIconHeight(Resources resources, int iconResId){
+    public static int getIconHeight(Resources resources, int iconResId) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(resources, iconResId, options);

@@ -34,7 +34,7 @@ public class FetchMonthsAsyncTask extends AsyncTask<FetchMonthsAsyncTask.FetchPa
         calendar.setTime(month.getFirstDay().getCalendar().getTime());
         final List<Month> result = new ArrayList<>();
         for (int i = 0; i < SettingsManager.DEFAULT_MONTH_COUNT; i++) {
-            if(isCancelled())
+            if (isCancelled())
                 break;
 
             calendar.add(Calendar.MONTH, future ? 1 : -1);
@@ -45,7 +45,6 @@ public class FetchMonthsAsyncTask extends AsyncTask<FetchMonthsAsyncTask.FetchPa
                 result.add(0, newMonth);
             }
         }
-
         return result;
     }
 
@@ -55,9 +54,6 @@ public class FetchMonthsAsyncTask extends AsyncTask<FetchMonthsAsyncTask.FetchPa
             if (future) {
                 monthAdapter.getData().addAll(months);
                 monthAdapter.notifyItemRangeInserted(monthAdapter.getData().size() - 1, defaultMonthCount);
-            } else {
-                monthAdapter.getData().addAll(0, months);
-                monthAdapter.notifyItemRangeInserted(0, defaultMonthCount);
             }
         }
     }
