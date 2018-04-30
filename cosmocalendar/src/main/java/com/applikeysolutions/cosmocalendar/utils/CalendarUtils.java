@@ -59,8 +59,18 @@ public final class CalendarUtils {
                 || !DateUtils.isSameMonth(firstDisplayedDayCalendar, end));
 
         for (Day day : days) {
-            if (day.getCalendar().getTime().getTime() < Calendar.getInstance().getTime().getTime()) {
-                day.setDisabled(true);
+            int dayDay = day.getCalendar().get(Calendar.DAY_OF_MONTH);
+            int dayMonth = day.getCalendar().get(Calendar.MONTH);
+            int dayYear = day.getCalendar().get(Calendar.YEAR);
+            int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+            int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            long currentTime = Calendar.getInstance().getTime().getTime();
+            long dayTime = day.getCalendar().getTime().getTime();
+            day.setDisabled(dayTime < currentTime);
+
+            if (dayDay == currentDay && dayYear == currentYear && dayMonth == currentMonth) {
+                day.setDisabled(false);
             }
         }
 

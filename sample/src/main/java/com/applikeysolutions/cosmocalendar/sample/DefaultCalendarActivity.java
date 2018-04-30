@@ -162,10 +162,10 @@ public class DefaultCalendarActivity extends AppCompatActivity implements RadioG
     private void clearSelectionsMenuClick() {
         calendarView.clearSelections();
 
-        fridayCriteriaEnabled = false;
-        threeMonthsCriteriaEnabled = false;
-        menuFridays.setTitle(getString(R.string.select_all_fridays));
-        menuThreeMonth.setTitle(getString(R.string.select_three_months));
+//        fridayCriteriaEnabled = false;
+//        threeMonthsCriteriaEnabled = false;
+//        menuFridays.setTitle(getString(R.string.select_all_fridays));
+//        menuThreeMonth.setTitle(getString(R.string.select_three_months));
     }
 
 
